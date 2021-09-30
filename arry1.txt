@@ -1,0 +1,30 @@
+//Program - 1 Array Practise 
+
+#include <stdio.h>
+int main()
+{
+  
+    //Declaring 1D Array
+    int arr[5];
+    int lb=0;
+    int size=5;
+    int ub=size-1;
+    int i;
+    
+    //Giving Input to Array
+    for(i=lb;i<size;i++)
+    {
+        printf("Enter Value :");
+        scanf("%d",&arr[i]);
+    }
+    
+    //Display The Array
+    printf("----------Array Display-------------\n");
+    for(i=lb;i<size;i++)
+    {
+        printf("%d\t",arr[i]);
+        //printf("\n");
+    }
+
+    return 0;
+}
