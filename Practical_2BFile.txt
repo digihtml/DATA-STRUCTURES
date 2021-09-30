@@ -1,0 +1,184 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+void insert_beg();
+void insert_end();
+void display();
+void search();
+
+struct node
+{
+    int data;
+    struct node *next;
+}*start=NULL,*q,*t;
+
+void main()
+{
+
+
+    int ch;
+
+    while(1)
+    {
+	printf("\n\n---- Singly Linked List(SLL) Menu ----");
+	printf("\n1.Insert\n2.Display\n3.Search\n4.Exit\n\n");
+	printf("Enter your choice(1-4):");
+	scanf("%d",&ch);
+
+	switch(ch)
+	{
+	    case 1:
+		    printf("\n---- Insert Menu ----");
+		    printf("\n1.beginning\n2.end\n3.Exit");
+		    printf("\n\nEnter your choice(1-3):");
+		    scanf("%d",&ch);
+
+		    switch(ch)
+		    {
+			case 1: insert_beg();
+				break;
+			case 2: insert_end();
+				break;
+			case 3: exit(0);
+
+			default: printf("Wrong Choice!!");
+		    }
+		    break;
+
+	    case 2: display();
+		    break;
+
+	    case 3: search();
+		    break;
+
+	    case 4: exit(0);
+
+	    default: printf("Wrong Choice!!");
+
+    }
+    }
+}
+
+void insert_beg()
+{
+    int num;
+    t=(struct node*)malloc(sizeof(struct node));
+    printf("Enter data:");
+    scanf("%d",&num);
+    t->data=num;
+
+    if(start==NULL)        //If list is empty
+    {
+	t->next=NULL;
+	start=t;
+    }
+    else
+    {
+	t->next=start;
+	start=t;
+    }
+}
+
+void insert_end()
+{
+    int num;
+    t=(struct node*)malloc(sizeof(struct node));
+    printf("Enter data:");
+    scanf("%d",&num);
+    t->data=num;
+    t->next=NULL;
+
+    if(start==NULL)        //If list is empty
+    {
+	start=t;
+    }
+    else
+    {
+	q=start;
+	while(q->next!=NULL)
+	{
+	q=q->next;
+	}
+	q->next=t;
+    }
+}
+
+
+void display()
+{
+    if(start==NULL)
+    {
+	printf("List is empty!!");
+    }
+    else
+    {
+	q=start;
+	printf("The linked list is:\n");
+	while(q!=NULL)
+	{
+	    printf("%d->",q->data);
+	    q=q->next;
+	}
+    }
+}
+void search()
+{
+	if(start==NULL)
+	{
+		printf("List is empty ..Can't Seacrh");
+
+	}
+	else
+	{
+		int n,flag=0,count=0;
+		printf("Enter data value to be searched : ");
+		scanf("%d",&n);
+
+		q=start;
+		while(q!=NULL)
+		{
+		    count++;
+			if(q->data == n)
+			{
+				printf("Value Found at %d",count);
+				flag=1;
+				break;
+			}
+			q=q->next;
+		}
+		if(flag==0)
+		{
+			printf("Value Not Found");
+		}
+
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

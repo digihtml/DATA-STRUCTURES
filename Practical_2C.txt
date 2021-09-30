@@ -1,0 +1,99 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+       int data;
+       struct node *prev, *next;
+}*start = NULL;
+
+static int node_count = 0;
+void insertNode(int);
+void sortList();
+void display();
+
+  
+/* Insert a new node at the end of the list */
+void insertNode(int data) {
+        struct node *temp, *ptr;
+       ptr = (struct node *)malloc(sizeof (struct node));
+	ptr->data = data;
+        ptr->prev = NULL;
+        ptr->next = NULL;
+
+        if (start==NULL) {
+                start = ptr;
+                node_count++;
+                return;
+        } else {
+                temp = start;
+                while (temp) {
+                        if (temp->next == NULL) {
+                                temp->next = ptr;
+                                ptr->prev = temp;
+                                node_count++;
+                                return;
+                        }
+                        temp=temp->next;
+                }
+        }
+}
+
+  
+
+void sortList() {
+        struct node *ptr1, *ptr2;
+        int i, j, temp;
+        ptr1 = ptr2 = start;
+
+        for (i = 0; i < node_count; i++) {
+                temp = ptr1->data;
+                for (j = 0; j < i; j++)
+                        ptr2 = ptr2->next;
+                for (j = i; j > 0 && ptr2->prev->data > temp; j--) {
+                        ptr2->data = ptr2->prev->data;
+                        ptr2 = ptr2->prev;
+                }
+                ptr2->data = temp;
+                ptr2 = head;
+                ptr1 = ptr1->next;
+        }
+}
+
+void display() {
+        struct node *ptr = start;
+        int i = 0;
+        while (ptr) {
+                printf("data in node%d : %d\n", i, ptr->data);
+                ptr = ptr->next;
+                i++;
+        }
+}
+
+void main() {
+        int ch, data;
+        while (1) {
+                printf("1.Insertion\n");
+                printf("2.Sort List\n3.Display\n");
+                printf("4.Exit\nEnter ur choice:");
+                scanf("%d", &ch);
+                switch (ch) {
+                        case 1:
+                                printf("Enter data to insert:");
+                                scanf("%d", &data);
+                                insertNode(data);
+                                break;
+                        
+                        case 2:
+                                sortList();
+                                break;
+                        case 3:
+                                display();
+                                break;
+                        case 4:
+                                exit(0);
+                        default:
+                                printf("please enter right option\n");
+                                break;
+                }
+        }
+}
